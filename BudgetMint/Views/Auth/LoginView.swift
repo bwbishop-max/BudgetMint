@@ -37,6 +37,7 @@ struct LoginView: View {
                         .textContentType(isSignUp ? .newPassword : .password)
                 }
                 .padding(.horizontal)
+                .onSubmit { submitForm() }
 
                 // Error message
                 if let error = authService.errorMessage {
@@ -49,15 +50,7 @@ struct LoginView: View {
 
                 // Action button
                 Button {
-                    isLoading = true
-                    Task {
-                        if isSignUp {
-                            await authService.signUp(email: email, password: password)
-                        } else {
-                            await authService.signIn(email: email, password: password)
-                        }
-                        isLoading = false
-                    }
+                    submitForm()
                 } label: {
                     Group {
                         if isLoading {
@@ -87,6 +80,19 @@ struct LoginView: View {
                 Spacer()
             }
             .navigationBarHidden(true)
+        }
+    }
+
+    private func submitForm() {
+        guard !email.isEmpty, !password.isEmpty, !isLoading else { return }
+        isLoading = true
+        Task {
+            if isSignUp {
+                await authService.signUp(email: email, password: password)
+            } else {
+                await authService.signIn(email: email, password: password)
+            }
+            isLoading = false
         }
     }
 }

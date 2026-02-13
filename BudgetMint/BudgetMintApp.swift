@@ -17,6 +17,14 @@ struct BudgetMintApp: App {
             ContentView()
                 .environment(authService)
                 .environment(firestoreService)
+                #if DEBUG
+                .task {
+                    if let email = ProcessInfo.processInfo.environment["TEST_EMAIL"],
+                       let password = ProcessInfo.processInfo.environment["TEST_PASSWORD"] {
+                        await authService.signIn(email: email, password: password)
+                    }
+                }
+                #endif
         }
     }
 }
