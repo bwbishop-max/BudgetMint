@@ -36,7 +36,7 @@ struct DashboardView: View {
                             .foregroundStyle(.secondary)
                         Text(firestoreService.totalNetWorth.currencyFormatted)
                             .font(.system(size: 36, weight: .bold, design: .rounded))
-                            .foregroundStyle(firestoreService.totalNetWorth >= 0 ? .primary : .red)
+                            .foregroundStyle(firestoreService.totalNetWorth >= 0 ? Color.primary : Color.red)
                         Text("\(firestoreService.accounts.count) linked account\(firestoreService.accounts.count == 1 ? "" : "s")")
                             .font(.caption)
                             .foregroundStyle(.secondary)

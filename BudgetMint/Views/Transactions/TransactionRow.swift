@@ -53,7 +53,7 @@ struct TransactionRow: View {
             VStack(alignment: .trailing, spacing: 2) {
                 Text(transaction.amount, format: .currency(code: transaction.isoCurrencyCode.isEmpty ? "USD" : transaction.isoCurrencyCode))
                     .font(.body.weight(.semibold))
-                    .foregroundStyle(transaction.amount > 0 ? .primary : .green)
+                    .foregroundStyle(transaction.amount > 0 ? Color.primary : Color.green)
 
                 Text(budgetCategory.displayName)
                     .font(.caption2)
