@@ -19,9 +19,6 @@ targets:
     platform: iOS
     sources:
       - BudgetMint
-    resources:
-      - path: docs/GoogleService-Info.plist
-        buildPhase: resources
     dependencies:
       - package: firebase-ios-sdk
         product: FirebaseCore

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		05C6D45D9B5ED367DFCEB74E /* TransactionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169F33A1CE5D74D90B39B268 /* TransactionListView.swift */; };
+		0B05DEE9B428DF50665DA70C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 67ED805F7175102B5199F8F4 /* GoogleService-Info.plist */; };
 		11900EB121D2250A8C194332 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA4C78B7CDD95FA2A33650D /* AuthService.swift */; };
 		1861996C8CC141C3ABC85869 /* PlaidService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3C97B6D022DE8ECA78E1D7 /* PlaidService.swift */; };
 		1865AB1B794325E2E161BBDA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F34C6C7264AB1C3EDD09529 /* Extensions.swift */; };
@@ -42,6 +43,7 @@
 		435389A6EA64DF528F154668 /* LinkAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkAccountView.swift; sourceTree = "<group>"; };
 		54DDB49D705D75133FA8F4E8 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		63C7AFC742FB554F7D932BB6 /* BudgetMint.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = BudgetMint.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		67ED805F7175102B5199F8F4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6ED93BA36A670FE6B6CC5517 /* AccountsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsView.swift; sourceTree = "<group>"; };
 		91981E579C2D777F61771779 /* TransactionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionRow.swift; sourceTree = "<group>"; };
 		9AA4C78B7CDD95FA2A33650D /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 			children = (
 				EC52A1F2D43231D49ED32EA9 /* Assets.xcassets */,
 				B692B91BC2B343F5BECF2F55 /* BudgetMintApp.swift */,
+				67ED805F7175102B5199F8F4 /* GoogleService-Info.plist */,
 				80EF343F2E9941FC7AE61B94 /* Models */,
 				96AB3FD551F3A359AF393F42 /* Services */,
 				AC019B8D4C560AFF54520A7C /* Utilities */,
@@ -237,6 +240,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				46C8CA442D867A8576E05C31 /* Assets.xcassets in Resources */,
+				0B05DEE9B428DF50665DA70C /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
