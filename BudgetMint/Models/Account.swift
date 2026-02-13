@@ -1,7 +1,15 @@
 import Foundation
 import FirebaseFirestore
 
-struct Account: Codable, Identifiable {
+struct Account: Codable, Identifiable, Hashable {
+    static func == (lhs: Account, rhs: Account) -> Bool {
+        lhs.plaidAccountId == rhs.plaidAccountId
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(plaidAccountId)
+    }
+
     @DocumentID var id: String?
     let userId: String
     let itemId: String

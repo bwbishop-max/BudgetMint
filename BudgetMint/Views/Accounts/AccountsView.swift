@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct AccountsView: View {
-    @Environment(AuthService.self) private var authService
     @Environment(FirestoreService.self) private var firestoreService
     @State private var showingLinkAccount = false
 
@@ -27,16 +26,18 @@ struct AccountsView: View {
                         Spacer()
                         Text(firestoreService.totalNetWorth.currencyFormatted)
                             .font(.title2.bold())
-                            .foregroundStyle(firestoreService.totalNetWorth >= 0 ? .green : .red)
+                            .foregroundStyle(firestoreService.totalNetWorth >= 0 ? BMTheme.brandGreen : .red)
                     }
                     .padding(.vertical, 4)
                 }
 
                 // Accounts grouped by type
                 ForEach(sortedAccountTypes, id: \.self) { type in
-                    Section(header: Text(displayName(for: type))) {
+                    Section(header: Label(displayName(for: type), systemImage: BMTheme.iconForAccountType(type))) {
                         ForEach(groupedAccounts[type] ?? []) { account in
-                            AccountRow(account: account)
+                            NavigationLink(value: account) {
+                                AccountRow(account: account)
+                            }
                         }
                     }
                 }
@@ -60,16 +61,12 @@ struct AccountsView: View {
                         Image(systemName: "plus")
                     }
                 }
-                ToolbarItem(placement: .topBarLeading) {
-                    Button("Sign Out") {
-                        firestoreService.stopListening()
-                        authService.signOut()
-                    }
-                    .font(.footnote)
-                }
             }
             .sheet(isPresented: $showingLinkAccount) {
                 LinkAccountView()
+            }
+            .navigationDestination(for: Account.self) { account in
+                AccountDetailView(account: account)
             }
         }
     }
@@ -88,8 +85,20 @@ struct AccountsView: View {
 struct AccountRow: View {
     let account: Account
 
+    private var typeColor: Color {
+        BMTheme.colorForAccountType(account.type)
+    }
+
     var body: some View {
-        HStack {
+        HStack(spacing: BMTheme.spacingMD) {
+            // Colored type icon
+            Image(systemName: BMTheme.iconForAccountType(account.type))
+                .font(.body)
+                .foregroundStyle(.white)
+                .frame(width: 36, height: 36)
+                .background(typeColor)
+                .clipShape(Circle())
+
             VStack(alignment: .leading, spacing: 2) {
                 Text(account.name)
                     .font(.body.weight(.medium))
@@ -110,6 +119,6 @@ struct AccountRow: View {
                 }
             }
         }
-        .padding(.vertical, 2)
+        .padding(.vertical, 6)
     }
 }

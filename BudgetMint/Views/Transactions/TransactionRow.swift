@@ -17,6 +17,7 @@ struct TransactionRow: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 40, height: 40)
                         .clipShape(Circle())
+                        .transition(.opacity)
                 } placeholder: {
                     categoryIcon
                 }
@@ -40,8 +41,8 @@ struct TransactionRow: View {
                             .font(.caption2.weight(.medium))
                             .padding(.horizontal, 6)
                             .padding(.vertical, 1)
-                            .background(.yellow.opacity(0.2))
-                            .foregroundStyle(.yellow)
+                            .background(BMTheme.pending.opacity(0.2))
+                            .foregroundStyle(BMTheme.pending)
                             .clipShape(Capsule())
                     }
                 }
@@ -53,7 +54,7 @@ struct TransactionRow: View {
             VStack(alignment: .trailing, spacing: 2) {
                 Text(transaction.amount, format: .currency(code: transaction.isoCurrencyCode.isEmpty ? "USD" : transaction.isoCurrencyCode))
                     .font(.body.weight(.semibold))
-                    .foregroundStyle(transaction.amount > 0 ? Color.primary : Color.green)
+                    .foregroundStyle(transaction.amount > 0 ? Color.primary : BMTheme.income)
 
                 Text(budgetCategory.displayName)
                     .font(.caption2)
@@ -64,7 +65,7 @@ struct TransactionRow: View {
                     .clipShape(Capsule())
             }
         }
-        .padding(.vertical, 2)
+        .padding(.vertical, BMTheme.spacingSM)
     }
 
     private var categoryIcon: some View {

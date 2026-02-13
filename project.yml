@@ -12,6 +12,9 @@ packages:
   plaid-link-ios:
     url: https://github.com/plaid/plaid-link-ios
     from: "5.0.0"
+  GoogleSignIn-iOS:
+    url: https://github.com/google/GoogleSignIn-iOS
+    from: "8.0.0"
 
 targets:
   BudgetMint:
@@ -30,6 +33,16 @@ targets:
         product: FirebaseFunctions
       - package: plaid-link-ios
         product: LinkKit
+      - package: GoogleSignIn-iOS
+        product: GoogleSignIn
+      - package: GoogleSignIn-iOS
+        product: GoogleSignInSwift
+    info:
+      path: BudgetMint/Info.plist
+      properties:
+        CFBundleURLTypes:
+          - CFBundleURLSchemes:
+              - com.googleusercontent.apps.500541456550-5v287f3k5ev56e4lubjo5ar4fupstsrg
     settings:
       PRODUCT_BUNDLE_IDENTIFIER: com.brucebishop.BudgetMint
       INFOPLIST_GENERATION_CLASS: $(PRODUCT_MODULE_NAME).BudgetMintApp

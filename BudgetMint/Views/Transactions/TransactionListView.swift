@@ -39,9 +39,11 @@ struct TransactionListView: View {
                 // Category filter chips
                 if !activeCategories.isEmpty {
                     ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 8) {
+                        HStack(spacing: BMTheme.spacingSM) {
                             FilterChip(title: "All", isSelected: selectedCategory == nil) {
-                                selectedCategory = nil
+                                withAnimation(BMTheme.standardAnimation) {
+                                    selectedCategory = nil
+                                }
                             }
                             ForEach(activeCategories) { cat in
                                 FilterChip(
@@ -49,7 +51,9 @@ struct TransactionListView: View {
                                     color: cat.color,
                                     isSelected: selectedCategory == cat.id
                                 ) {
-                                    selectedCategory = selectedCategory == cat.id ? nil : cat.id
+                                    withAnimation(BMTheme.standardAnimation) {
+                                        selectedCategory = selectedCategory == cat.id ? nil : cat.id
+                                    }
                                 }
                             }
                         }
@@ -63,7 +67,9 @@ struct TransactionListView: View {
                 ForEach(groupedByDate, id: \.0) { date, transactions in
                     Section(header: Text(date.toDate?.shortFormatted ?? date)) {
                         ForEach(transactions) { transaction in
-                            TransactionRow(transaction: transaction)
+                            NavigationLink(value: transaction) {
+                                TransactionRow(transaction: transaction)
+                            }
                         }
                     }
                 }
@@ -77,6 +83,11 @@ struct TransactionListView: View {
             .searchable(text: $searchText, prompt: "Search transactions")
             .refreshable {
                 await syncAllItems()
+                let generator = UINotificationFeedbackGenerator()
+                generator.notificationOccurred(.success)
+            }
+            .navigationDestination(for: Transaction.self) { transaction in
+                TransactionDetailView(transaction: transaction)
             }
         }
     }
@@ -102,10 +113,15 @@ struct FilterChip: View {
                 .font(.caption.weight(.medium))
                 .padding(.horizontal, 12)
                 .padding(.vertical, 6)
-                .background(isSelected ? color.opacity(0.2) : Color.gray.opacity(0.15))
+                .background(isSelected ? color.opacity(0.2) : Color(.tertiarySystemFill))
                 .foregroundStyle(isSelected ? color : .primary)
                 .clipShape(Capsule())
+                .overlay(
+                    Capsule()
+                        .strokeBorder(isSelected ? color.opacity(0.5) : .clear, lineWidth: 1)
+                )
         }
         .buttonStyle(.plain)
+        .animation(BMTheme.standardAnimation, value: isSelected)
     }
 }

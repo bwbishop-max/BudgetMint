@@ -26,14 +26,19 @@ struct ContentView: View {
                         .tabItem {
                             Label("Accounts", systemImage: "building.columns.fill")
                         }
+
+                    SettingsView()
+                        .tag(3)
+                        .tabItem {
+                            Label("Settings", systemImage: "gearshape.fill")
+                        }
                 }
+                .tint(BMTheme.brandGreen)
                 .onAppear {
                     if let tab = ProcessInfo.processInfo.environment["TEST_TAB"],
                        let index = Int(tab) {
                         selectedTab = index
                     }
-                }
-                .onAppear {
                     firestoreService.startListening()
                 }
                 .onDisappear {
@@ -43,5 +48,6 @@ struct ContentView: View {
                 LoginView()
             }
         }
+        .animation(BMTheme.standardAnimation, value: authService.isAuthenticated)
     }
 }

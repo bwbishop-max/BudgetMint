@@ -1,5 +1,6 @@
 import SwiftUI
 import FirebaseCore
+import GoogleSignIn
 
 @main
 struct BudgetMintApp: App {
@@ -17,6 +18,9 @@ struct BudgetMintApp: App {
             ContentView()
                 .environment(authService)
                 .environment(firestoreService)
+                .onOpenURL { url in
+                    GIDSignIn.sharedInstance.handle(url)
+                }
                 #if DEBUG
                 .task {
                     if let email = ProcessInfo.processInfo.environment["TEST_EMAIL"],

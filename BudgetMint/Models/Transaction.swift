@@ -1,7 +1,15 @@
 import Foundation
 import FirebaseFirestore
 
-struct Transaction: Codable, Identifiable {
+struct Transaction: Codable, Identifiable, Hashable {
+    static func == (lhs: Transaction, rhs: Transaction) -> Bool {
+        lhs.transactionId == rhs.transactionId
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(transactionId)
+    }
+
     @DocumentID var id: String?
     let userId: String
     let accountId: String
