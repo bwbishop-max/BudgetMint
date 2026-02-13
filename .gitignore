@@ -1,0 +1,23 @@
+# Dependencies
+functions/node_modules/
+
+# Compiled output
+functions/lib/
+
+# Environment variables
+functions/.env
+
+# macOS
+.DS_Store
+
+# Xcode
+*.xcuserstate
+xcuserdata/
+DerivedData/
+build/
+
+# Firebase
+.firebase/
+
+# Google Services (contains API keys)
+docs/GoogleService-Info.plist
